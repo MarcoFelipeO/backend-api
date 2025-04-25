@@ -31,8 +31,11 @@ public class UsuarioController {
         usuarioService.eliminarPorId(id);
     }
 
-    @PutMapping
-    public Usuario modificarUsuario(@RequestBody Usuario usuario){
-        return usuarioService.guardarUsuario(usuario);
+    @PutMapping("/{id}")
+    public Usuario modificarUsuario(@PathVariable Long id, @RequestBody Usuario usuario){
+        return usuarioService.modificarUsuario(usuario);
     }
+
+
+
 }
