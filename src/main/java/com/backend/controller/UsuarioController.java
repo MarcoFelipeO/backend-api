@@ -20,4 +20,14 @@ public class UsuarioController {
     public List<Usuario> traerTodos() {
         return usuarioService.traerTodos();
     }
+
+    @PostMapping
+    public Usuario guardarUsuario(@RequestBody Usuario usuario){
+        return usuarioService.guardarUsuario(usuario);
+    }
+
+    @DeleteMapping
+    public void eliminarUsuario(Long id){
+        usuarioService.eliminarPorId(id);
+    }
 }
