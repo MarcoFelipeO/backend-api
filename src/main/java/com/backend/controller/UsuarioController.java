@@ -17,12 +17,14 @@ public class UsuarioController {
     private  UsuarioService usuarioService;
 
 
-
     @GetMapping
     public List<Usuario> traerTodos() {
         return usuarioService.traerTodos();
     }
 
+    //*METODO POST:traemos aqui con el para el objeto telefono, luego con el objeto usuario gracias al join, podemos
+    // traer nuestro metodo .getTelefonos y tel.setUsuario(usuario) sin esto no guarda nuestra union
+    // de manera correcta*//
     @PostMapping
     public Usuario guardarUsuario(@RequestBody Usuario usuario){
         for (Telefono tel : usuario.getTelefonos()) {
