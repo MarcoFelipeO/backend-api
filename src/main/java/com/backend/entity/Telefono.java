@@ -16,7 +16,9 @@ public class Telefono {
     private String tipo;
 
 
-
+    @ManyToOne
+    @JoinColumn(name= "usuario_id")
+    private Usuario usuario;
 
 
     //constructores getter y setter, contructor vacio y contructor con valores.

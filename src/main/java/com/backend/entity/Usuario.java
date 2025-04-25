@@ -2,6 +2,9 @@ package com.backend.entity;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 public class Usuario {
 
@@ -14,7 +17,8 @@ public class Usuario {
 
 
 
-
+    @OneToMany(mappedBy = "usuario", cascade= CascadeType.ALL, orphanRemoval = true)
+    private List<Telefono> telefonos = new ArrayList<>();
 
 
     public Usuario() {
