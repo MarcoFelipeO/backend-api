@@ -1,5 +1,6 @@
 package com.backend.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
@@ -10,7 +11,7 @@ public class Usuario {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long usuario_id;
     private String nombres;
     private String apellidos;
     private String correo;
@@ -18,25 +19,27 @@ public class Usuario {
 
 
     @OneToMany(mappedBy = "usuario", cascade= CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference //para no devolver un json con recursividad infinita
     private List<Telefono> telefonos = new ArrayList<>();
 
 
     public Usuario() {
     }
 
-    public Usuario(Long id, String nombres, String apellidos, String correo) {
-        this.id = id;
+    public Usuario(Long usuario_id, String nombres, String apellidos, String correo, List<Telefono> telefonos) {
+        this.usuario_id = usuario_id;
         this.nombres = nombres;
         this.apellidos = apellidos;
         this.correo = correo;
+        this.telefonos = telefonos;
     }
 
-    public Long getId() {
-        return id;
+    public Long getUsuario_id() {
+        return usuario_id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setUsuario_id(Long usuario_id) {
+        this.usuario_id = usuario_id;
     }
 
     public String getNombres() {
@@ -61,5 +64,13 @@ public class Usuario {
 
     public void setCorreo(String correo) {
         this.correo = correo;
+    }
+
+    public List<Telefono> getTelefonos() {
+        return telefonos;
+    }
+
+    public void setTelefonos(List<Telefono> telefonos) {
+        this.telefonos = telefonos;
     }
 }

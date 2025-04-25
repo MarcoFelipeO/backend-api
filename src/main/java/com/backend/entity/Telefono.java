@@ -1,5 +1,6 @@
 package com.backend.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
@@ -17,19 +18,22 @@ public class Telefono {
 
 
     @ManyToOne
+    @JsonBackReference
     @JoinColumn(name= "usuario_id")
     private Usuario usuario;
 
 
     //constructores getter y setter, contructor vacio y contructor con valores.
 
+
     public Telefono() {
     }
 
-    public Telefono(Long telefono_id, String numero, String tipo) {
+    public Telefono(Long telefono_id, String numero, String tipo, Usuario usuario) {
         this.telefono_id = telefono_id;
         this.numero = numero;
         this.tipo = tipo;
+        this.usuario = usuario;
     }
 
     public Long getTelefono_id() {
@@ -54,5 +58,13 @@ public class Telefono {
 
     public void setTipo(String tipo) {
         this.tipo = tipo;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 }

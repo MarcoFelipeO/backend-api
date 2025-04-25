@@ -1,5 +1,6 @@
 package com.backend.controller;
 
+import com.backend.entity.Telefono;
 import com.backend.entity.Usuario;
 import com.backend.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,9 @@ public class UsuarioController {
 
     @PostMapping
     public Usuario guardarUsuario(@RequestBody Usuario usuario){
+        for (Telefono tel : usuario.getTelefonos()) {
+            tel.setUsuario(usuario);
+        }
         return usuarioService.guardarUsuario(usuario);
     }
 
