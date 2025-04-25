@@ -26,8 +26,13 @@ public class UsuarioController {
         return usuarioService.guardarUsuario(usuario);
     }
 
-    @DeleteMapping
-    public void eliminarUsuario(Long id){
+    @DeleteMapping("/{id}")
+    public void eliminarUsuario(@PathVariable Long id){
         usuarioService.eliminarPorId(id);
+    }
+
+    @PutMapping
+    public Usuario modificarUsuario(@RequestBody Usuario usuario){
+        return usuarioService.guardarUsuario(usuario);
     }
 }
