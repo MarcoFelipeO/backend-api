@@ -15,6 +15,7 @@ public class Usuario {
     private String nombres;
     private String apellidos;
     private String correo;
+    private String password;
 
 
 
@@ -26,11 +27,12 @@ public class Usuario {
     public Usuario() {
     }
 
-    public Usuario(Long usuario_id, String nombres, String apellidos, String correo, List<Telefono> telefonos) {
+    public Usuario(Long usuario_id, String nombres, String apellidos, String correo, String password, List<Telefono> telefonos) {
         this.usuario_id = usuario_id;
         this.nombres = nombres;
         this.apellidos = apellidos;
         this.correo = correo;
+        this.password = password;
         this.telefonos = telefonos;
     }
 
@@ -64,6 +66,14 @@ public class Usuario {
 
     public void setCorreo(String correo) {
         this.correo = correo;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public List<Telefono> getTelefonos() {
