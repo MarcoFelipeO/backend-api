@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/usuarios")
@@ -36,6 +37,9 @@ public class UsuarioController {
         return usuarioService.modificarUsuario(usuario);
     }
 
-
+    @GetMapping("/{id}")
+    public Optional<Usuario> traerUnUsuario(@PathVariable Long id){
+        return usuarioService.traerPorId(id);
+    }
 
 }
