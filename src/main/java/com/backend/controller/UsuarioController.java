@@ -25,14 +25,16 @@ public class UsuarioController {
     //*METODO POST:traemos aqui con el para el objeto telefono, luego con el objeto usuario gracias al join, podemos
     // traer nuestro metodo .getTelefonos y tel.setUsuario(usuario) sin esto no guarda nuestra union
     // de manera correcta*//
-    @PostMapping
-    public Usuario guardarUsuario(@RequestBody Usuario usuario){
-        for (Telefono tel : usuario.getTelefonos()) {
-            tel.setUsuario(usuario);
-        }
-        return usuarioService.guardarUsuario(usuario);
-    }
 
+    /*
+            @PostMapping
+            public Usuario guardarUsuario(@RequestBody Usuario usuario){
+                for (Telefono tel : usuario.getTelefonos()) {
+                    tel.setUsuario(usuario);
+                }
+                return usuarioService.guardarUsuario(usuario);
+            }
+    */
     @DeleteMapping("/{id}")
     public void eliminarUsuario(@PathVariable Long id){
         usuarioService.eliminarPorId(id);

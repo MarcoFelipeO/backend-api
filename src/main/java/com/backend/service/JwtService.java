@@ -23,6 +23,7 @@ public class JwtService {
     public String generateToken(Usuario usuario) {
         return Jwts.builder()
                 .setSubject(usuario.getCorreo())
+                .claim("rol", usuario.getRol())
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + 3600000)) // 1 hora
                 .signWith(key)
@@ -36,5 +37,14 @@ public class JwtService {
                 .parseClaimsJws(token)
                 .getBody()
                 .getSubject();
+    }
+
+    public String extractRole(String token) { // 🔥 Nuevo método
+        return Jwts.parserBuilder()
+                .setSigningKey(key)
+                .build()
+                .parseClaimsJws(token)
+                .getBody()
+                .get("rol", String.class);
     }
 }

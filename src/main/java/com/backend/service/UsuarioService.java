@@ -40,10 +40,11 @@ public class UsuarioService {
         return usuarioRepository.findById(id);   //buscar por un id
     }
 
-    public Usuario guardarUsuario(Usuario usuario){
-        return usuarioRepository.save(usuario);
-    }
-
+    /*
+            public Usuario guardarUsuario(Usuario usuario){
+            return usuarioRepository.save(usuario);
+            }
+    */
     public Usuario modificarUsuario(Usuario usuario){
         return usuarioRepository.save(usuario);
     }
@@ -51,11 +52,10 @@ public class UsuarioService {
 
     public void registrar(Usuario usuario) {
         // Importante: Encriptar la contraseña antes de guardar
+        usuario.setRol("USER");
         usuario.setPassword(passwordEncoder.encode(usuario.getPassword()));
         usuarioRepository.save(usuario);
     }
-
-
 
     public Usuario autenticar(String correo, String password) {
         Usuario usuario = usuarioRepository.findByCorreo(correo)
