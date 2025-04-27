@@ -6,10 +6,13 @@ import com.backend.service.JwtService;
 import com.backend.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 
 @RestController
@@ -38,6 +41,14 @@ public class AuthController {
         Usuario usuario = usuarioService.autenticar(loginRequest.getCorreo(), loginRequest.getPassword());
         String token = jwtService.generateToken(usuario);
         return ResponseEntity.ok(token);
+    }
+
+
+    @PostMapping("/registrar-admin")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<String> registrarAdmin(@RequestBody Usuario usuario){
+        usuarioService.registrarAdmin(usuario);
+        return ResponseEntity.ok("Administrador creado exitosamente");
     }
 
 }

@@ -11,16 +11,15 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.beans.factory.annotation.Autowired;
 
 @Configuration
 @EnableWebSecurity
-public class SecurityConfig {
+public class ConfigSeguridad {
 
 
 
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http, JwtAuthenticationFilter jwtAuthFilter) throws Exception {
+    public SecurityFilterChain securityFilterChain(HttpSecurity http, JwtFiltroAutentificacion jwtAuthFilter) throws Exception {
         return http
                 .csrf().disable()
                 .authorizeHttpRequests(auth -> auth
@@ -43,8 +42,8 @@ public class SecurityConfig {
     }
 
     @Bean
-    public JwtAuthenticationFilter jwtAuthenticationFilter(UsuarioService usuarioService, JwtService jwtService) {
-        return new JwtAuthenticationFilter(usuarioService, jwtService);
+    public JwtFiltroAutentificacion jwtAuthenticationFilter(UsuarioService usuarioService, JwtService jwtService) {
+        return new JwtFiltroAutentificacion(usuarioService, jwtService);
     }
 
 

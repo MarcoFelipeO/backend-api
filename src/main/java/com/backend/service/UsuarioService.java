@@ -1,6 +1,5 @@
 package com.backend.service;
 
-import com.backend.config.SecurityConfig;
 import com.backend.entity.Usuario;
 import com.backend.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +36,7 @@ public class UsuarioService {
     }
 
     public Optional<Usuario> traerPorId(Long id){
+
         return usuarioRepository.findById(id);   //buscar por un id
     }
 
@@ -70,11 +70,15 @@ public class UsuarioService {
 
 
     public Usuario buscarPorCorreo(String correo) {
+
         return usuarioRepository.findByCorreo(correo).orElse(null);
     }
 
 
-
-
+    public void registrarAdmin(Usuario usuario){
+        usuario.setPassword(passwordEncoder.encode(usuario.getPassword()));
+        usuario.setRol("ADMIN");
+        usuarioRepository.save(usuario);
+    }
 
 }
