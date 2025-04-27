@@ -1,4 +1,4 @@
-# Usar una imagen de Java 21
+# Usar una imagen de Java 21 o 22 (según tu necesidad)
 FROM eclipse-temurin:21-jdk
 
 # Crear el directorio donde vivirá la app
@@ -7,6 +7,9 @@ WORKDIR /app
 # Copiar el archivo Maven Wrapper y pom.xml
 COPY pom.xml mvnw* ./
 COPY .mvn .mvn
+
+# 🔥 Dar permisos de ejecución al wrapper
+RUN chmod +x mvnw
 
 # Descargar dependencias
 RUN ./mvnw dependency:go-offline
