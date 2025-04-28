@@ -1,6 +1,7 @@
 package com.backend.controller;
 
 import com.backend.dto.LoginRequest;
+import com.backend.entity.Telefono;
 import com.backend.entity.Usuario;
 import com.backend.service.JwtService;
 import com.backend.service.UsuarioService;
@@ -33,6 +34,10 @@ public class AuthController {
     @PostMapping("/registrar")
     public ResponseEntity<String> register(@RequestBody Usuario usuario) {
         usuarioService.registrar(usuario);
+
+        for (Telefono tel : usuario.getTelefonos()) {
+            tel.setUsuario(usuario);
+        }
         return ResponseEntity.ok("Usuario registrado exitosamente");
     }
 

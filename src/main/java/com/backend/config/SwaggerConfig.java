@@ -13,6 +13,6 @@ public class SwaggerConfig {
         return new OpenAPI().info(new Info()
                 .title("Microservicio de Usuarios API-REST")
                 .version("1.0")
-                .description("Documentación generada automáticamente con Swagger"));
+                .description("Documentación generada con Swagger"));
     }
 }
