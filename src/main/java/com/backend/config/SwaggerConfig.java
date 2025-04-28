@@ -19,9 +19,14 @@ public class SwaggerConfig {
                         "            - Para crear un usuario, usa `POST /usuarios`.\n" +
                         "            - Para actualizar, usa `PUT /usuarios/{id}`.\n" +
                         "            - Para eliminar, usa `DELETE /usuarios/{id}`.\n" +
+                        "            - Algunos EndPoints estan protegidos. /usuarios" +
+                        "            - Pero puedes traer telefonos, usa `GET /telefonos, pero antes debes logearte /`.\n" +
                         "\n" +
                         "            Cada endpoint muestra los parámetros requeridos y los posibles códigos de respuesta.\n" +
                         "\n" +
-                        "            ¡Explora la documentación usando el menú desplegable de la izquierda o el buscador!"));
+                        "            ¡Explora la documentación usando el menú desplegable de la izquierda o el buscador!" +
+                        "" +
+                        "" +
+                        "MiL<3"));
     }
 }
