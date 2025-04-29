@@ -27,6 +27,6 @@ public class SwaggerConfig {
                         "            ¡Explora la documentación usando el menú desplegable de la izquierda o el buscador!" +
                         "" +
                         "" +
-                        "MiL<3"));
+                        "MiL<3  "));
     }
 }
