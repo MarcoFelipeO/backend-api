@@ -1,6 +1,9 @@
 package com.backend.dto;
 
 public class TelefonoDTO {
-    private String nombres;
+
+    private String numero;
+    private String tipo;
+
 
 }
