@@ -1,9 +1,11 @@
 package com.backend.controller;
 
+import com.backend.dto.UsuarioDTO;
 import com.backend.entity.Telefono;
 import com.backend.entity.Usuario;
 import com.backend.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,8 +20,9 @@ public class UsuarioController {
 
 
     @GetMapping
-    public List<Usuario> traerTodos() {
-        return usuarioService.traerTodos();
+    public ResponseEntity<List<UsuarioDTO>> traerTodos() {
+        List<UsuarioDTO> usuarios = usuarioService.traerTodos();
+        return ResponseEntity.ok(usuarios);
     }
 
     //*METODO POST:traemos aqui con el para el objeto telefono, luego con el objeto usuario gracias al join, podemos
