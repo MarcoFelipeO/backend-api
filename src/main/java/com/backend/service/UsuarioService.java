@@ -1,6 +1,8 @@
 package com.backend.service;
 
+import com.backend.dto.UsuarioDTO;
 import com.backend.entity.Usuario;
+import com.backend.mapper.UsuarioMapper;
 import com.backend.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -10,12 +12,16 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class UsuarioService {
 
     @Autowired
     private UsuarioRepository usuarioRepository;
+
+    @Autowired
+    UsuarioMapper usuarioMapper;
 
 
     private final PasswordEncoder passwordEncoder;
@@ -25,23 +31,27 @@ public class UsuarioService {
         this.passwordEncoder = passwordEncoder;
     }
 
+    public List<UsuarioDTO> traerTodos() {
+        return usuarioRepository.findAll()
+                .stream()
+                .map(usuarioMapper::toDTO)
+                .collect(Collectors.toList());
+    }
 
+    public UsuarioDTO traerPorId(Long id){
+        Usuario usuario = usuarioRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Usuario no encontrado con el id: " +id));
+        return usuarioMapper.toDTO(usuario);
+    }
 
-    public List<Usuario> traerTodos() {
-        return usuarioRepository.findAll();
+    public UsuarioDTO guardarUsuario(UsuarioDTO usuarioDTO){
+        Usuario usuario = usuarioMapper.toEntity(usuarioDTO);
+        Usuario guardado = usuarioRepository.save(usuario);
+        return usuarioMapper.toDTO(guardado);
     }
 
     public void eliminarPorId(Long id) {
         usuarioRepository.deleteById(id); //metodo eliminar
-    }
-
-    public Optional<Usuario> traerPorId(Long id){
-
-        return usuarioRepository.findById(id);   //buscar por un id
-    }
-
-    public Usuario guardarUsuario(Usuario usuario){
-        return usuarioRepository.save(usuario);
     }
 
     public Usuario modificarUsuario(Usuario usuario){
