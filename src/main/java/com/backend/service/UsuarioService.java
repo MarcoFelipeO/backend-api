@@ -1,6 +1,7 @@
 package com.backend.service;
 
 import com.backend.dto.UsuarioDTO;
+import com.backend.entity.Telefono;
 import com.backend.entity.Usuario;
 import com.backend.mapper.UsuarioMapper;
 import com.backend.repository.UsuarioRepository;
@@ -51,12 +52,38 @@ public class UsuarioService {
     }
 
     public void eliminarPorId(Long id) {
-        usuarioRepository.deleteById(id); //metodo eliminar
+        if (!usuarioRepository.existsById(id)){
+           throw new RuntimeException("Usuario no encontrado para eliminar" + id);
+        }
+        usuarioRepository.deleteById(id);
     }
 
-    public Usuario modificarUsuario(Usuario usuario){
-        return usuarioRepository.save(usuario);
+    public UsuarioDTO modificarUsuario(Long id, UsuarioDTO usuarioDTO) {
+        Usuario usuarioExistente = usuarioRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Usuario no encontrado con id: " + id));
+
+        // Usa MapStruct para actualizar los campos del DTO sobre la entidad existente
+        usuarioMapper.updateUsuarioFromDto(usuarioDTO, usuarioExistente);
+
+        // Si los teléfonos deben ser reemplazados completamente:
+        if (usuarioDTO.getTelefonos() != null) {
+            usuarioExistente.setTelefonos(
+                    usuarioDTO.getTelefonos().stream()
+                            .map(dto -> {
+                                Telefono telefono = new Telefono();
+                                telefono.setNumero(dto.getNumero());
+                                telefono.setTipo(dto.getTipo());
+                                telefono.setUsuario(usuarioExistente); // establecer relación
+                                return telefono;
+                            })
+                            .collect(Collectors.toList())
+            );
+        }
+
+        Usuario actualizado = usuarioRepository.save(usuarioExistente);
+        return usuarioMapper.toDTO(actualizado);
     }
+
 
 
     public void registrar(Usuario usuario) {

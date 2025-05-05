@@ -2,9 +2,7 @@ package com.backend.mapper;
 
 import com.backend.dto.UsuarioDTO;
 import com.backend.entity.Usuario;
-import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
-import org.mapstruct.Mappings;
+import org.mapstruct.*;
 
 @Mapper(componentModel = "spring", uses = {TelefonoMapper.class})
 public interface UsuarioMapper {
@@ -16,4 +14,7 @@ public interface UsuarioMapper {
     Usuario toEntity(UsuarioDTO usuarioDTO);
 
     UsuarioDTO toDTO(Usuario usuario);
+
+    @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
+    void updateUsuarioFromDto(UsuarioDTO dto, @MappingTarget Usuario usuario);
 }
