@@ -18,18 +18,17 @@ import java.util.stream.Collectors;
 @Service
 public class UsuarioService {
 
-    @Autowired
-    private UsuarioRepository usuarioRepository;
-
-    @Autowired
-    UsuarioMapper usuarioMapper;
-
-
+    private final UsuarioRepository usuarioRepository;
+    private final UsuarioMapper usuarioMapper;
     private final PasswordEncoder passwordEncoder;
     // Constructor
-    public UsuarioService(UsuarioRepository usuarioRepository, PasswordEncoder passwordEncoder) {
-        this.usuarioRepository = usuarioRepository;
+
+    public UsuarioService(PasswordEncoder passwordEncoder,
+                          UsuarioRepository usuarioRepository,
+                          UsuarioMapper usuarioMapper) {
         this.passwordEncoder = passwordEncoder;
+        this.usuarioRepository = usuarioRepository;
+        this.usuarioMapper = usuarioMapper;
     }
 
     public List<UsuarioDTO> traerTodos() {
