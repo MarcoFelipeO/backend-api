@@ -45,13 +45,15 @@ public class UsuarioController {
     }
 
     @PutMapping("/{id}")
-    public Usuario modificarUsuario(@PathVariable Long id, @RequestBody Usuario usuario){
-        return usuarioService.modificarUsuario(usuario);
+    public ResponseEntity<UsuarioDTO> modificarUsuario(@PathVariable Long id, @RequestBody UsuarioDTO usuarioDTO){
+        UsuarioDTO actualizado = usuarioService.modificarUsuario(id, usuarioDTO);
+            return ResponseEntity.ok(actualizado);
     }
 
     @GetMapping("/{id}")
-    public Optional<Usuario> traerUnUsuario(@PathVariable Long id){
-        return usuarioService.traerPorId(id);
+    public ResponseEntity<UsuarioDTO> traerUnUsuario(@PathVariable Long id){
+       UsuarioDTO usuarioDTO = usuarioService.traerPorId(id);
+        return ResponseEntity.ok(usuarioDTO);
     }
 
 }
