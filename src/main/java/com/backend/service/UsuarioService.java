@@ -64,22 +64,6 @@ public class UsuarioService {
 
         // Usa MapStruct para actualizar los campos del DTO sobre la entidad existente
         usuarioMapper.updateUsuarioFromDto(usuarioDTO, usuarioExistente);
-
-        // Si los teléfonos deben ser reemplazados completamente:
-        if (usuarioDTO.getTelefonos() != null) {
-            usuarioExistente.setTelefonos(
-                    usuarioDTO.getTelefonos().stream()
-                            .map(dto -> {
-                                Telefono telefono = new Telefono();
-                                telefono.setNumero(dto.getNumero());
-                                telefono.setTipo(dto.getTipo());
-                                telefono.setUsuario(usuarioExistente); // establecer relación
-                                return telefono;
-                            })
-                            .collect(Collectors.toList())
-            );
-        }
-
         Usuario actualizado = usuarioRepository.save(usuarioExistente);
         return usuarioMapper.toDTO(actualizado);
     }
