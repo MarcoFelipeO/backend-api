@@ -67,12 +67,14 @@ public class UsuarioService {
 
 
 
-    public void registrar(Usuario usuario) {
+    public void registrar(UsuarioDTO usuarioDTO) {
         // Importante: Encriptar la contraseña antes de guardar
+        Usuario usuario = usuarioMapper.toEntity(usuarioDTO);
         usuario.setRol("USER");
-        usuario.setPassword(passwordEncoder.encode(usuario.getPassword()));
+        usuario.setPassword(passwordEncoder.encode(usuarioDTO.getPassword()));
         usuarioRepository.save(usuario);
     }
+
 
     public Usuario autenticar(String correo, String password) {
         Usuario usuario = usuarioRepository.findByCorreo(correo)

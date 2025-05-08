@@ -29,15 +29,15 @@ public class UsuarioController {
     // traer nuestro metodo .getTelefonos y tel.setUsuario(usuario) sin esto no guarda nuestra union
     // de manera correcta*//
 
-    /*
-            @PostMapping
-            public Usuario guardarUsuario(@RequestBody Usuario usuario){
-                for (Telefono tel : usuario.getTelefonos()) {
-                    tel.setUsuario(usuario);
-                }
-                return usuarioService.guardarUsuario(usuario);
-            }
-    */
+    @PostMapping("/registrar")
+    public ResponseEntity<String> register(@RequestBody Usuario usuario) {
+        usuarioService.registrar(new UsuarioDTO());
+
+        for (Telefono tel : usuario.getTelefonos()) {
+            tel.setUsuario(usuario);
+        }
+        return ResponseEntity.ok("Usuario registrado exitosamente");
+    }
 
     @DeleteMapping("/{id}")
     public void eliminarUsuario(@PathVariable Long id){
