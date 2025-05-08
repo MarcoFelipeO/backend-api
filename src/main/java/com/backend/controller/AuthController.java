@@ -30,7 +30,7 @@ public class AuthController {
         this.usuarioService = usuarioService;
         this.jwtService = jwtService;
     }
-
+/*
     @PostMapping("/registrar")
     public ResponseEntity<String> register(@RequestBody Usuario usuario) {
         usuarioService.registrar(usuario);
@@ -40,6 +40,8 @@ public class AuthController {
         }
         return ResponseEntity.ok("Usuario registrado exitosamente");
     }
+
+ */
 
     @PostMapping("/login")
     public ResponseEntity<String> login(@RequestBody LoginRequest loginRequest) {
