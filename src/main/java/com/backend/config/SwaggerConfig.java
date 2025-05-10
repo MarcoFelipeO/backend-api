@@ -13,7 +13,7 @@ public class SwaggerConfig {
         return new OpenAPI().info(new Info()
                 .title("Microservicio de Usuarios API-REST")
                 .version("1.0")
-                .description("Bienvenido a la documentación de la API Usuarios.\n" +
+                .description("Bienvenido a la documentación de la API Usuario.\n" +
                         "\n" +
                         "            - Para listar usuarios, utiliza el endpoint `GET /usuarios`.\n" +
                         "            - Para crear un usuario, usa `POST /usuarios`.\n" +
